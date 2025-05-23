@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kakao Redirect</title>
+</head>
+<body>
+  <h1>Redirect 성공</h1>
+  <p id="code">인가 코드: 없음</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    document.getElementById("code").textContent = "인가 코드: " + code;
+  </script>
+</body>
+</html>
