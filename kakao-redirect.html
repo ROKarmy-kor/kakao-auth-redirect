@@ -5,13 +5,28 @@
   <title>Kakao Redirect</title>
 </head>
 <body>
-  <h1>Redirect 성공</h1>
-  <p id="code">인가 코드: 없음</p>
+  <h1>Kakao 로그인 처리 중...</h1>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
-    document.getElementById("code").textContent = "인가 코드: " + code;
+
+    if (code) {
+      // Make Webhook URL
+      fetch("https://hook.us1.make.com/https://hook.eu2.make.com/eetgos1mk89cflqopt754fh633jakv3l", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ code: code })
+      }).then(() => {
+        document.body.innerHTML = "<h2>로그인 성공! 잠시 후 자동처리됩니다.</h2>";
+      }).catch(() => {
+        document.body.innerHTML = "<h2>전송 실패. 다시 시도해주세요.</h2>";
+      });
+    } else {
+      document.body.innerHTML = "<h2>코드가 없습니다. 인증 실패</h2>";
+    }
   </script>
 </body>
 </html>
